@@ -1,0 +1,76 @@
+Physics_LargeVector.cpp: In member function ‘void Physics_LargeVector::Dump(char*)’:
+Physics_LargeVector.cpp:200:17: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szTitle);
+                 ^
+Physics_LargeVector.cpp:211:16: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szTemp);
+                ^
+Physics_Matrix3x3.cpp: In member function ‘void Physics_Matrix3x3::Dump(char*)’:
+Physics_Matrix3x3.cpp:200:19: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szHeading);
+                   ^
+Physics_Matrix3x3.cpp:208:16: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szTemp);
+                ^
+Physics_ParticleSystem.cpp: In member function ‘void Physics_ParticleSystem::Update_Explicit(float)’:
+Physics_ParticleSystem.cpp:181:8: warning: name lookup of ‘i’ changed
+   for( i=0; i<m_iInverseIterations; i++ )
+        ^
+Physics_ParticleSystem.cpp:144:6: warning:   matches this ‘i’ under ISO standard rules
+  int i;
+      ^
+Physics_ParticleSystem.cpp:158:11: warning:   matches this ‘i’ under old rules
+   for(int i=0, ni=m_Forces.size(); i<ni; i++)
+           ^
+Physics_ParticleSystem.cpp: In member function ‘void Physics_ParticleSystem::Update_Implicit(float)’:
+Physics_ParticleSystem.cpp:1320:8: warning: name lookup of ‘i’ changed
+   for( i=0; i<m_iParticles; i++ )
+        ^
+Physics_ParticleSystem.cpp:1175:6: warning:   matches this ‘i’ under ISO standard rules
+  int i, iIterations = 0, iMaxIterations = (int)sqrt(double(m_iParticles))+3;
+      ^
+Physics_ParticleSystem.cpp:1200:11: warning:   matches this ‘i’ under old rules
+   for(int i=0, ni=m_Forces.size(); i<ni; i++)
+           ^
+Physics_ParticleSystem.cpp:1340:23: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    m_b.Dump( "b:\r\n" );
+                       ^
+Physics_ParticleSystem.cpp:1341:23: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    m_P.Dump( "P:\r\n" );
+                       ^
+Physics_ParticleSystem.cpp:1358:24: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    m_b.Dump( "b: \r\n" );
+                        ^
+Physics_ParticleSystem.cpp:1359:24: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+    m_P.Dump( "P: \r\n" );
+                        ^
+Physics_ParticleSystem.cpp: In member function ‘void Physics_ParticleSystem::Update_SemiImplicit(float)’:
+Physics_ParticleSystem.cpp:1477:8: warning: name lookup of ‘i’ changed
+   for( i=0; i<m_iParticles; i++ )
+        ^
+Physics_ParticleSystem.cpp:1424:6: warning:   matches this ‘i’ under ISO standard rules
+  int i;
+      ^
+Physics_ParticleSystem.cpp:1462:11: warning:   matches this ‘i’ under old rules
+   for(int i=0, ni=m_Forces.size(); i<ni; i++)
+           ^
+Physics_SparseSymmetricMatrix.cpp: In member function ‘void Physics_SparseSymmetricMatrix::Dump(char*)’:
+Physics_SparseSymmetricMatrix.cpp:334:17: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szTitle);
+                 ^
+Physics_SparseSymmetricMatrix.cpp:341:15: warning: format not a string literal and no format arguments [-Wformat-security]
+  printf(szTemp);
+               ^
+Physics_SparseSymmetricMatrix.cpp:360:19: warning: format not a string literal and no format arguments [-Wformat-security]
+      printf(szTemp);
+                   ^
+Physics_SymmetricMatrix.cpp: In member function ‘void Physics_SymmetricMatrix::Dump(char*)’:
+Physics_SymmetricMatrix.cpp:158:16: warning: format not a string literal and no format arguments [-Wformat-security]
+   printf(szTemp);
+                ^
+Physics_SymmetricMatrix.cpp:164:15: warning: format not a string literal and no format arguments [-Wformat-security]
+  printf(szTemp);
+               ^
+Physics_SymmetricMatrix.cpp:176:17: warning: format not a string literal and no format arguments [-Wformat-security]
+    printf(szTemp);
+                 ^
