@@ -45,23 +45,25 @@ m = ModuleInfo()
 modules.append(m)
 m.pkg_name = 'Renderer'
 m.module_name = 'csVpRenderer'
+m.extra_compile_args = ['-fopenmp']
 m.include_dirs = ['../external_libraries/VirtualPhysics2010/usr/include/']
-m.libraries = ['vpLib']
+m.libraries = ['vpLib', 'gomp']
 m.library_dirs = ['usr/lib']
 
-m = ModuleInfo()
-modules.append(m)
-m.pkg_name = 'Mesh'
-m.module_name = 'csMetric'
-m.libraries = ['BaseLib']
-m.library_dirs = ['usr/lib']
+#m = ModuleInfo()
+#modules.append(m)
+#m.pkg_name = 'Mesh'
+#m.module_name = 'csMetric'
+#m.libraries = ['BaseLib']
+#m.library_dirs = ['usr/lib']
 
 m = ModuleInfo()
 modules.append(m)
 m.pkg_name = 'Simulator'
 m.module_name = 'csVpModel'
+m.extra_compile_args = ['-fopenmp']
 m.include_dirs = ['../external_libraries/VirtualPhysics2010/usr/include/']
-m.libraries = ['vpLib']
+m.libraries = ['vpLib', 'gomp']
 m.library_dirs = ['usr/lib']
 m.sources_in_pkg_dir = ['myGeom.cpp']
 m.depends_in_pkg_dir = ['stdafx.h', 'myGeom.h']
@@ -71,8 +73,9 @@ m = ModuleInfo()
 modules.append(m)
 m.pkg_name = 'Simulator'
 m.module_name = 'csVpWorld'
+m.extra_compile_args = ['-fopenmp']
 m.include_dirs = ['../external_libraries/VirtualPhysics2010/usr/include/']
-m.libraries = ['vpLib']
+m.libraries = ['vpLib', 'gomp']
 m.library_dirs = ['usr/lib']
 m.depends_in_pkg_dir = ['stdafx.h']
 m.additional_depends = ['../common_sources/vputil.h']
@@ -81,27 +84,31 @@ m = ModuleInfo()
 modules.append(m)
 m.pkg_name = 'Simulator'
 m.module_name = 'csVpBody'
+m.extra_compile_args = ['-fopenmp']
 m.include_dirs = ['../external_libraries/VirtualPhysics2010/usr/include/']
-m.libraries = ['vpLib']
+m.libraries = ['vpLib', 'gomp']
 m.library_dirs = ['usr/lib']
 m.sources_in_pkg_dir = ['myGeom.cpp']
 m.depends_in_pkg_dir = ['stdafx.h', 'myGeom.h']
 m.additional_depends = ['../common_sources/vputil.h']
 
-m = ModuleInfo()
-modules.append(m)
-m.pkg_name = 'Optimization'
-m.module_name = 'csEQP'
-m.include_dirs = ['../external_libraries/BaseLib']
-m.libraries = ['BaseLib', 'AMD', 'gdi32', 'User32']
-m.library_dirs = ['Release', '../external_libraries/dependencies/UMFPACK5.2/', 'C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\Lib']
-m.depends_in_pkg_dir = ['BaseLibUtil.h', 'stdafx.h']
+#m = ModuleInfo()
+#modules.append(m)
+#m.pkg_name = 'Optimization'
+#m.module_name = 'csEQP'
+#m.include_dirs = ['../external_libraries/BaseLib']
+#m.libraries = ['BaseLib', 'AMD', 'gdi32', 'User32']
+#m.library_dirs = ['Release', '../external_libraries/dependencies/UMFPACK5.2/', 'C:\Program Files\Microsoft Visual Studio .NET 2003\Vc7\PlatformSDK\Lib']
+#m.depends_in_pkg_dir = ['BaseLibUtil.h', 'stdafx.h']
 
 m = ModuleInfo()
 modules.append(m)
 m.pkg_name = 'Math'
 m.module_name = 'csMath'
-m.include_dirs = ['../external_libraries/VirtualPhysics/vpLib/include/']
+m.extra_compile_args = ['-fopenmp']
+m.libraries = ['vpLib', 'gomp']
+m.library_dirs = ['usr/lib']
+m.include_dirs = ['../external_libraries/VirtualPhysics2010/usr/include/']
 m.sources_in_pkg_dir = ['EulerAngles.cpp']
 m.depends_in_pkg_dir = ['stdafx.h', 'EulerAngles.h', 'QuatTypes.h']
 m.additional_depends = ['../common_sources/vputil.h']
@@ -125,7 +132,7 @@ for m in modules:
 setup(name = 'Common', ext_modules = extensions)
 
 
-copy_tree('build/lib.win32-2.5', './')
+copy_tree('build/lib.linux-x86_64-2.7', './')
 
 
 

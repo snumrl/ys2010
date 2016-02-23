@@ -57,12 +57,12 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 {
 	bp::list bodyIDs, positions, forces, positionLocals;
 	int bodyID;
-	static numeric::array O_Vec3(make_tuple(0.,0.,0.));
+	numeric::array O_Vec3(make_tuple(0.,0.,0.));
 	vpBody* pBody;
-	const vpGeom* pGeom;
+	vpGeom* pGeom;
 	char type;
 	scalar data[3];
-	static Vec3 position, velocity, force, positionLocal;
+	Vec3 position, velocity, force, positionLocal;
 
 	for(int i=0; i<len(bodyIDsToCheck); ++i)
 	{
@@ -71,7 +71,7 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 
 		for(int j=0; j<pBody->GetNumGeometry(); ++j)
 		{
-			pGeom = pBody->GetGeometry(j);
+			pGeom = const_cast<vpGeom*>(pBody->GetGeometry(j));
 
 			const vector<Vec3>& verticesLocal = pGeom->getVerticesLocal();
 			const vector<Vec3>& verticesGlobal = pGeom->getVerticesGlobal();
@@ -111,10 +111,10 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 // @return penalty force가 발생했으면 true
 bool VpWorld::_calcPenaltyForce( vpBody* pBody, const Vec3& position, const Vec3& velocity, Vec3& force, scalar Ks, scalar Ds, scalar mu )
 {
-	static Vec3 vRelVel, vNormalRelVel, vTangentialRelVel;
-	static scalar normalRelVel, tangentialRelVel;
-	static const Vec3 vNormal(0,1,0);
-	static Vec3 vNormalForce, vFrictionForce;
+	Vec3 vRelVel, vNormalRelVel, vTangentialRelVel;
+	scalar normalRelVel, tangentialRelVel;
+	const Vec3 vNormal(0,1,0);
+	Vec3 vNormalForce, vFrictionForce;
 	scalar normalForce=0., frictionForce=0.;
 
 	vRelVel = velocity;
@@ -155,7 +155,7 @@ void VpWorld::applyPenaltyForce( const bp::list& bodyIDs, const bp::list& positi
 {
 	int bodyID;
 	vpBody* pBody;
-	static Vec3 position, force;
+	Vec3 position, force;
 
 	for(int i=0; i<len(bodyIDs); ++i)
 	{
@@ -173,15 +173,15 @@ tuple VpWorld::calcPenaltyForce_Boxes( const bp::list& boxSizes, const bp::list 
 {
 	bp::list bodyIDs, positions, forces, positionLocals;
 	int bodyID;
-	static numeric::array O_Vec3(make_tuple(0.,0.,0.));
+	numeric::array O_Vec3(make_tuple(0.,0.,0.));
 	const vpBody* pBody;
-	const vpGeom* pGeom;
+	vpGeom* pGeom;
 	char type;
 	scalar data[3];
-	static Vec3 position, velocity, force, positionLocal;
+	Vec3 position, velocity, force, positionLocal;
 
-	static Vec3 boxSize;
-	static SE3 boxFrame;
+	Vec3 boxSize;
+	SE3 boxFrame;
 
 	for(int a=0; a<len(boxSizes); ++a)
 	{
@@ -195,7 +195,7 @@ tuple VpWorld::calcPenaltyForce_Boxes( const bp::list& boxSizes, const bp::list 
 
 			for(int j=0; j<pBody->GetNumGeometry(); ++j)
 			{
-				pGeom = pBody->GetGeometry(j);
+				pGeom = const_cast<vpGeom*>(pBody->GetGeometry(j));
 
 				const vector<Vec3>& verticesLocal = pGeom->getVerticesLocal();
 				const vector<Vec3>& verticesGlobal = pGeom->getVerticesGlobal();
@@ -235,15 +235,15 @@ tuple VpWorld::calcPenaltyForce_Boxes( const bp::list& boxSizes, const bp::list 
 // @return penalty force가 발생했으면 true
 bool VpWorld::_calcPenaltyForce_Boxes( const Vec3& boxSize, const SE3& boxFrame, const vpBody* pBody, const Vec3& position, const Vec3& velocity, Vec3& force, scalar Ks, scalar Ds, scalar mu )
 {
-	static Vec3 vRelVel, vNormalRelVel, vTangentialRelVel;
-	static scalar normalRelVel, tangentialRelVel;
-	static const Vec3 vNormal(0,1,0);
-	static Vec3 vNormalForce, vFrictionForce;
+	Vec3 vRelVel, vNormalRelVel, vTangentialRelVel;
+	scalar normalRelVel, tangentialRelVel;
+	const Vec3 vNormal(0,1,0);
+	Vec3 vNormalForce, vFrictionForce;
 	scalar normalForce=0., frictionForce=0.;
 
 	// box 처리 관련
-	static Vec3 position_moved, velocity_moved, force_moved;
-	static const Vec3 vZero(0,0,0);
+	Vec3 position_moved, velocity_moved, force_moved;
+	const Vec3 vZero(0,0,0);
 	SE3 boxR;
 	scalar boxHeight;
 

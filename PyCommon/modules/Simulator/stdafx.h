@@ -6,7 +6,7 @@
 #pragma once
 
 #include <stdio.h>
-#include <tchar.h>
+//#include <tchar.h>
 
 #include <iostream>
 #include <string>
@@ -17,7 +17,7 @@
 
 
 #include <boost/python.hpp>
-#include <python.h>
+#include <Python.h>
 using namespace boost::python;
 namespace bp = boost::python;
 

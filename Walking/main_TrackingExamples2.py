@@ -186,7 +186,7 @@ def walkings():
     mcfg = cPickle.load(mcfgfile)
     mcfgfile.close()
     
-    wcfg = ypc.WorldConfig()
+    wcfg = ysPhysConfig.WorldConfig()
     wcfg.planeHeight = 0.
     wcfg.useDefaultContactModel = False
     wcfg.lockingVel = c_locking_vel
@@ -1071,7 +1071,7 @@ def turnings_spinning():
     mcfg = cPickle.load(mcfgfile)
     mcfgfile.close()
     
-    wcfg = ypc.WorldConfig()
+    wcfg = ysPhysConfig.WorldConfig()
     wcfg.planeHeight = 0.
     wcfg.useDefaultContactModel = False
     wcfg.lockingVel = c_locking_vel
