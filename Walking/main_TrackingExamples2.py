@@ -1,3 +1,4 @@
+import pdb
 from fltk import *
 import copy, os.path, cPickle, time
 import numpy as np
@@ -432,6 +433,7 @@ def walkings():
         swingKnees = seginfo[segIndex]['swingKnees']
         groundHeight = seginfo[segIndex]['ground_height']
         maxStfPushFrame = seginfo[segIndex]['max_stf_push_frame']
+        pdb.set_trace()
         
         prev_frame = frame-1 if frame>0 else 0
 #        prev_frame = frame
