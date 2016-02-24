@@ -1,4 +1,3 @@
-import psyco; psyco.full()
 from fltk import *
 import os.path, glob, cPickle
 import numpy as np
@@ -304,5 +303,5 @@ def simulation_test():
     Fl.run()
                 
 if __name__=='__main__':
-    preprocess()
-#    simulation_test()
+#    preprocess()
+    simulation_test()

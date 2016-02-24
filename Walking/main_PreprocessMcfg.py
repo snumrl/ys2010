@@ -1,10 +1,11 @@
-import psyco; psyco.full()
+# import psyco; psyco.full()
 import cPickle
 
 import sys
 if '../PyCommon/modules' not in sys.path:
     sys.path.append('../PyCommon/modules')
 import Simulator.ysPhysConfig as ypc
+import numpy.core.multiarray
 
 def buildMassMap():
     massMap = {}
@@ -91,8 +92,8 @@ if __name__=='__main__':
     node.width = .1
     node.geom = 'MyFoot1'
 
-#    dir = './ppmotion/'
-    dir = './icmotion_last/'
+    dir = './ppmotion/'
+    # dir = './icmotion_last/'
     outputName = 'mcfg'
     outputFile = open(dir+outputName, 'w')
     cPickle.dump(mcfg, outputFile)

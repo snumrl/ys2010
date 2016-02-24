@@ -1,4 +1,3 @@
-import psyco; psyco.full()
 from fltk import *
 import os.path, glob, cPickle,pprint
 import numpy as np
@@ -22,23 +21,26 @@ if __name__=='__main__':
 #    dir = './icmotion_test/'
 #    paths = glob.glob(dir+'*.temp')
 
-#    dir = './ppmotion/'
-#    paths = glob.glob(dir+'*.bvh')
-#    paths = glob.glob(dir+'wd2_WalkSameSame01.bvh')
-#    paths = glob.glob(dir+'wd2_u-turn_1.bvh')
-#    paths = glob.glob(dir+'wd2_cross_walk*.bvh')
-#    paths = glob.glob(dir+'*_REPEATED.bvh')
-#    paths = glob.glob(dir+'wd2_pick_walk_1.bvh')
-#    paths = glob.glob(dir+'wd2_WalkSameSame01_REPEATED_FOOT.bvh')
-#    paths = glob.glob(dir+'wd2_WalkForwardSlow01_REPEATED_FOOT.bvh')
-#    paths = glob.glob(dir+'wd2_WalkSoldier00_REPEATED_FOOT.bvh')
+    dir = './ppmotion/'
+    paths = glob.glob(dir+'*.bvh')
+    '''
+    paths = glob.glob(dir+'wd2_WalkSameSame01.bvh')
+    paths = glob.glob(dir+'wd2_u-turn_1.bvh')
+    paths = glob.glob(dir+'wd2_cross_walk*.bvh')
+    paths = glob.glob(dir+'*_REPEATED.bvh')
+    paths = glob.glob(dir+'wd2_pick_walk_1.bvh')
+    paths = glob.glob(dir+'wd2_WalkSameSame01_REPEATED_FOOT.bvh')
+    paths = glob.glob(dir+'wd2_WalkForwardSlow01_REPEATED_FOOT.bvh')
+    paths = glob.glob(dir+'wd2_WalkForwardNormal01_REPEATED_FOOT.bvh')
+    paths = glob.glob(dir+'wd2_WalkSoldier00_REPEATED_FOOT.bvh')
+    '''
 
-#    hRef = .1; vRef = .4
+    hRef = .1; vRef = .4
 ##    hRef = .1; vRef = .2
 
-    dir = './ppmotion_long/'
-    paths = glob.glob(dir+'wd2_WalkBackward00_REPEATED.bvh')
-    hRef = 10.; vRef = .4
+#    dir = './ppmotion_long/'
+#    paths = glob.glob(dir+'wd2_WalkBackward00_REPEATED.bvh')
+#    hRef = 10.; vRef = .4
 
 
 #    dir = './rawmotion_slope/'
@@ -64,17 +66,17 @@ if __name__=='__main__':
         lKnee = skeleton.getJointIndex('LeftLeg');  rKnee = skeleton.getJointIndex('RightLeg')
         lFoot = skeleton.getJointIndex('LeftFoot'); rFoot = skeleton.getJointIndex('RightFoot')
         
-#        mcfgfile = open(dir + 'mcfg', 'r')
-#        mcfg = cPickle.load(mcfgfile)
-#        mcfgfile.close()
-#        wcfg = ypc.WorldConfig()
-#        vpWorld = cvw.VpWorld(wcfg)
-#        motionModel = cvm.VpMotionModel(vpWorld, motion_ori[0], mcfg)
-#        
-##        bodyMasses = getBodyMasses()
-#        bodyMasses = motionModel.getBodyMasses()
-#        uppers = [skeleton.getJointIndex(name) for name in ['Hips', 'Spine', 'Spine1', 'LeftArm', 'LeftForeArm', 'RightArm', 'RightForeArm']]
-#        upperMass = sum([bodyMasses[i] for i in uppers])
+        mcfgfile = open(dir + 'mcfg', 'r')
+        mcfg = cPickle.load(mcfgfile)
+        mcfgfile.close()
+        wcfg = ypc.WorldConfig()
+        vpWorld = cvw.VpWorld(wcfg)
+        motionModel = cvm.VpMotionModel(vpWorld, motion_ori[0], mcfg)
+        
+#        bodyMasses = getBodyMasses()
+        bodyMasses = motionModel.getBodyMasses()
+        uppers = [skeleton.getJointIndex(name) for name in ['Hips', 'Spine', 'Spine1', 'LeftArm', 'LeftForeArm', 'RightArm', 'RightForeArm']]
+        upperMass = sum([bodyMasses[i] for i in uppers])
         
         lc = yma.getElementContactStates(motion_ori, 'LeftFoot', hRef, vRef)
         rc = yma.getElementContactStates(motion_ori, 'RightFoot', hRef, vRef)
@@ -100,18 +102,18 @@ if __name__=='__main__':
             seginfos[i]['swingFoots'] = swingFoots
             seginfos[i]['swingKnees'] = swingKnees
             
-#            if start<end:
-#                seginfos[i]['ground_height'] = min([posture_seg.getJointPositionGlobal(foot)[1] for foot in [lFoot, rFoot] for posture_seg in motion_ori[start+1:end+1]])
-#            
-#                seginfos[i]['max_stf_push_frame'] = None
-#                if len(swingFoots)>0:
-#                    pushes = []
-#                    for frame in range(start, (start+end)/2 + 1):
-#                        dCM_tar = yrp.getCM(motion_ori.getJointVelocitiesGlobal(frame), bodyMasses, None, uppers)
-#                        direction = mm.normalize2(mm.projectionOnPlane(dCM_tar, (1,0,0), (0,0,1)))
-#                        directionAxis = np.cross((0,1,0), direction)
-#                        pushes.append(mm.componentOnVector(mm.logSO3(motion_ori[frame].getJointOrientationFromParentGlobal(swingFoots[0])), directionAxis))
-#                    seginfos[i]['max_stf_push_frame'] = pushes.index(max(pushes)) 
+            if start<end:
+                seginfos[i]['ground_height'] = min([posture_seg.getJointPositionGlobal(foot)[1] for foot in [lFoot, rFoot] for posture_seg in motion_ori[start+1:end+1]])
+            
+                seginfos[i]['max_stf_push_frame'] = None
+                if len(swingFoots)>0:
+                    pushes = []
+                    for frame in range(start, (start+end)/2 + 1):
+                        dCM_tar = yrp.getCM(motion_ori.getJointVelocitiesGlobal(frame), bodyMasses, None, uppers)
+                        direction = mm.normalize2(mm.projectionOnPlane(dCM_tar, (1,0,0), (0,0,1)))
+                        directionAxis = np.cross((0,1,0), direction)
+                        pushes.append(mm.componentOnVector(mm.logSO3(motion_ori[frame].getJointOrientationFromParentGlobal(swingFoots[0])), directionAxis))
+                    seginfos[i]['max_stf_push_frame'] = pushes.index(max(pushes)) 
 
         # write .seg
         inputName = os.path.basename(path)

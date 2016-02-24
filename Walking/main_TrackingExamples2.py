@@ -5,6 +5,9 @@ import numpy as np
 import sys
 if '../PyCommon/modules' not in sys.path:
     sys.path.append('../PyCommon/modules')
+
+#if '../../PyCommon/modules' not in sys.path:
+#    sys.path.append('../../PyCommon/modules')
 import Math.mmMath as mm
 import Math.csMath as cm
 import Math.ysFunctionGraph as yfg
@@ -97,12 +100,12 @@ def walkings():
 #    filename = 'wd2_WalkForwardSlow01.bvh'
 ##    filename = 'wd2_WalkForwardSlow01_REPEATED.bvh' # 3 frame diff
 
-##    K_swp_vel_sag = .1; K_swp_vel_cor = .4; K_swp_pos_sag = 1.; K_swp_pos_cor = 0.
-##    K_stp_pos = .6
-#    K_swp_vel_sag = .0; K_swp_vel_cor = .3; K_swp_pos_sag = 1.2; K_swp_pos_cor = .2
-#    K_swp_pos_sag_faster = .05
-#    filename = 'wd2_WalkForwardNormal00.bvh'
-##    filename = 'wd2_WalkForwardNormal00_REPEATED.bvh'
+#    K_swp_vel_sag = .1; K_swp_vel_cor = .4; K_swp_pos_sag = 1.; K_swp_pos_cor = 0.
+#    K_stp_pos = .6
+    K_swp_vel_sag = .0; K_swp_vel_cor = .3; K_swp_pos_sag = 1.2; K_swp_pos_cor = .2
+    K_swp_pos_sag_faster = .05
+    filename = 'wd2_WalkForwardNormal00.bvh'
+#    filename = 'wd2_WalkForwardNormal00_REPEATED.bvh'
 
 ##    K_swp_vel_sag = .1; K_swp_vel_cor = .4; K_swp_pos_sag = .3; K_swp_pos_cor = 0.
 ##    K_stp_pos = 0.
@@ -186,7 +189,7 @@ def walkings():
     mcfg = cPickle.load(mcfgfile)
     mcfgfile.close()
     
-    wcfg = ysPhysConfig.WorldConfig()
+    wcfg = ypc.WorldConfig()
     wcfg.planeHeight = 0.
     wcfg.useDefaultContactModel = False
     wcfg.lockingVel = c_locking_vel
@@ -1071,7 +1074,7 @@ def turnings_spinning():
     mcfg = cPickle.load(mcfgfile)
     mcfgfile.close()
     
-    wcfg = ysPhysConfig.WorldConfig()
+    wcfg = ypc.WorldConfig()
     wcfg.planeHeight = 0.
     wcfg.useDefaultContactModel = False
     wcfg.lockingVel = c_locking_vel
@@ -1832,5 +1835,5 @@ def turnings_spinning():
     
         
 pass
-#walkings()
-turnings_spinning()
+walkings()
+#turnings_spinning()
