@@ -1,5 +1,4 @@
 from fltk import *
-import psyco; psyco.full()
 import cPickle, pprint, math, time
 from datetime import datetime
 import cProfile, os, random

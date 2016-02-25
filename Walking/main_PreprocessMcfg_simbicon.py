@@ -1,4 +1,3 @@
-import psyco; psyco.full()
 import cPickle
 
 import sys

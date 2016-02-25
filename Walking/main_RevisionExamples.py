@@ -1,4 +1,3 @@
-#import psyco; psyco.full()
 from fltk import *
 import copy, os.path, cPickle, time
 import numpy as np
