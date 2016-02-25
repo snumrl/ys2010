@@ -58,7 +58,7 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 	bp::list bodyIDs, positions, forces, positionLocals;
 	int bodyID;
 	numeric::array O_Vec3(make_tuple(0.,0.,0.));
-	vpBody* pBody;
+	const vpBody* pBody;
 	vpGeom* pGeom;
 	char type;
 	scalar data[3];
@@ -71,7 +71,7 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 
 		for(int j=0; j<pBody->GetNumGeometry(); ++j)
 		{
-			pGeom = const_cast<vpGeom*>(pBody->GetGeometry(j));
+			pGeom = pBody->GetGeometry(j);
 
 			const vector<Vec3>& verticesLocal = pGeom->getVerticesLocal();
 			const vector<Vec3>& verticesGlobal = pGeom->getVerticesGlobal();
@@ -109,7 +109,7 @@ tuple VpWorld::calcPenaltyForce( const bp::list& bodyIDsToCheck, const bp::list&
 // @param position 작용할 지점(global)
 // @param [out] force 발생한 penalty force(global)
 // @return penalty force가 발생했으면 true
-bool VpWorld::_calcPenaltyForce( vpBody* pBody, const Vec3& position, const Vec3& velocity, Vec3& force, scalar Ks, scalar Ds, scalar mu )
+bool VpWorld::_calcPenaltyForce( const vpBody* pBody, const Vec3& position, const Vec3& velocity, Vec3& force, scalar Ks, scalar Ds, scalar mu )
 {
 	Vec3 vRelVel, vNormalRelVel, vTangentialRelVel;
 	scalar normalRelVel, tangentialRelVel;
